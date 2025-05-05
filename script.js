@@ -1,36 +1,69 @@
+// Check if user is logged in on page load
 document.addEventListener("DOMContentLoaded", function() {
-    const pasteForm = document.getElementById('pasteForm');
-    const pasteContent = document.getElementById('pasteContent');
-    const pasteList = document.getElementById('pasteList');
+    const loggedInUser = localStorage.getItem("loggedInUser");
 
-    // Fetch and display pastes when the page loads
-    fetch('/pastes')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(paste => {
-                const pasteItem = document.createElement('li');
-                pasteItem.textContent = paste.content;
-                pasteList.appendChild(pasteItem);
-            });
-        });
-
-    // Handle form submission to create a new paste
-    pasteForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const content = pasteContent.value.trim();
-        if (content) {
-            fetch('/paste', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                const pasteItem = document.createElement('li');
-                pasteItem.textContent = data.content;
-                pasteList.appendChild(pasteItem);
-                pasteContent.value = ''; // Clear textarea
-            });
-        }
-    });
+    if (loggedInUser) {
+        // User is logged in
+        document.getElementById("loginSignup").style.display = "none";
+        document.getElementById("addPasteLink").style.display = "inline-block";
+        document.getElementById("logoutBtn").style.display = "inline-block";
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("add-paste").style.display = "block";
+    } else {
+        // User is not logged in
+        document.getElementById("loginSignup").style.display = "inline-block";
+        document.getElementById("addPasteLink").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "none";
+        document.getElementById("loginSection").style.display = "block";
+    }
 });
+
+// Toggle between Login and Signup Forms
+function toggleLogin() {
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("loginLink").style.display = "none";
+    document.getElementById("signupLink").style.display = "inline";
+}
+
+function toggleSignup() {
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+    document.getElementById("loginLink").style.display = "inline";
+    document.getElementById("signupLink").style.display = "none";
+}
+
+// Handle login
+document.getElementById("loginForm")?.addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    
+    if (username && password) {
+        // Store the login credentials in localStorage
+        localStorage.setItem("loggedInUser", username);
+        
+        // Show Add Paste page and hide login
+        window.location.reload();
+    }
+});
+
+// Handle signup
+document.getElementById("signupForm")?.addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const newUsername = document.getElementById("newUsername").value;
+    const newPassword = document.getElementById("newPassword").value;
+    
+    if (newUsername && newPassword) {
+        alert("Account Created! Please Log In.");
+        toggleLogin();
+    }
+});
+
+// Logout functionality
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.reload();
+}
