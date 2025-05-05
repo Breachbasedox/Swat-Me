@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paste Share</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Paste Share</h1>
+        <p>Share your thoughts, code, or anything else!</p>
+    </header>
+
+    <main>
+        <section class="paste-upload">
+            <h2>Upload a Paste</h2>
+            <form id="pasteForm">
+                <textarea id="pasteContent" placeholder="Enter your paste here..." required></textarea>
+                <button type="submit">Submit Paste</button>
+            </form>
+        </section>
+
+        <section class="paste-list">
+            <h2>Pastas from Others</h2>
+            <ul id="pasteList">
+                <!-- List of pastes will appear here -->
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
