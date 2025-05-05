@@ -3,22 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paste Share</title>
+    <title>Swat-Me</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
     <header>
-        <h1>Paste Share</h1>
-        <p>Share your thoughts, code, or anything else!</p>
+        <nav>
+            <ul>
+                <li><a href="#home">Swat-Me</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#add-paste" id="addPasteLink" style="display: none;">Add Paste</a></li>
+                <li><a href="#users">Users</a></li>
+                <li><a href="#upgrades">Upgrades</a></li>
+                <li><a href="#hall-of-autism">Hall of Autism</a></li>
+                <li><a href="#support">Support</a></li>
+                <li id="loginSignup"><a href="javascript:void(0);" onclick="toggleLogin()">Login/Signup</a></li>
+                <li id="logoutBtn" style="display: none;"><a href="javascript:void(0);" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <section class="paste-upload">
+        <section id="home">
+            <h1>Welcome to Swat-Me!</h1>
+            <p>Share your thoughts, code, or anything else!</p>
+        </section>
+
+        <!-- Login/Signup Section -->
+        <section id="loginSection" style="display: none;">
+            <h2>Login or Signup</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <button type="submit">Login</button>
+                <p id="signupLink"><a href="javascript:void(0);" onclick="toggleSignup()">Don't have an account? Sign up!</a></p>
+            </form>
+
+            <form id="signupForm" style="display: none;">
+                <label for="newUsername">Username:</label>
+                <input type="text" id="newUsername" required>
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" required>
+                <button type="submit">Signup</button>
+                <p id="loginLink"><a href="javascript:void(0);" onclick="toggleLogin()">Already have an account? Login!</a></p>
+            </form>
+        </section>
+
+        <section id="add-paste" style="display: none;">
             <h2>Upload a Paste</h2>
             <form id="pasteForm">
                 <textarea id="pasteContent" placeholder="Enter your paste here..." required></textarea>
                 <button type="submit">Submit Paste</button>
             </form>
+        </section>
+
+        <section id="users">
+            <h2>Users</h2>
+            <!-- List of users can be shown here -->
+        </section>
+
+        <section id="upgrades">
+            <h2>Upgrades</h2>
+            <!-- Info about upgrades -->
+        </section>
+
+        <section id="hall-of-autism">
+            <h2>Hall of Autism</h2>
+            <!-- Info about Hall of Autism -->
+        </section>
+
+        <section id="support">
+            <h2>Support</h2>
+            <!-- Support info -->
         </section>
 
         <section class="paste-list">
